@@ -8,6 +8,7 @@
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
         <link rel="stylesheet" href="{{ asset('css/main.css') }}">
     </head>
+    <input type="hidden" name="_token" id="csrf-token" value="{{ Session::token() }}" />
     <body class="bg-gray-100">
         <noscript>
             <strong>

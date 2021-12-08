@@ -47,6 +47,7 @@
 </template>
 <script>
     const baseUrl = window.location.origin;
+    const csrf_token = document.getElementById("csrf-token").value;
 
     export default {
         data() {
@@ -77,9 +78,10 @@
                         method: 'POST',
                         headers: {
                         'Content-Type': 'application/json',
+                        'Accept': 'application/json'
                         },
                         body: JSON.stringify(
-                            { nama: this.nama, harga: this.harga },
+                            { nama: this.nama, harga: this.harga , _token: csrf_token },
                         )
                     };
                      fetch(baseUrl+"/api/product/add", requestOptions)
@@ -112,10 +114,15 @@
                     const requestOptions = {
                         method: 'POST',
                         headers: {
-                        'Content-Type': 'application/json',
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json'
                         },
                         body: JSON.stringify(
-                            { nama: this.nama, harga: this.harga },
+                            {
+                                nama: this.nama,
+                                harga: this.harga,
+                                _token: csrf_token
+                            },
                         )
                     };
                      fetch(baseUrl+"/api/product/edit/"+this.id, requestOptions)

@@ -8,16 +8,19 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <router-link :to="{ name: 'home' }" class="nav-link">Home</router-link>
+                    <router-link :to="{ name: 'home' }" class="nav-link" v-if="userLogin">Home</router-link>
                 </li>
                 <li class="nav-item">
-                    <router-link :to="{ name: 'product' }" class="nav-link">Product</router-link>
+                    <router-link :to="{ name: 'product' }" class="nav-link" v-if="userLogin">Product</router-link>
                 </li>
                 <li class="nav-item">
-                    <router-link :to="{ name: 'profile' }" class="nav-link">Profile</router-link>
+                    <router-link :to="{ name: 'profile' }" class="nav-link" v-if="userLogin">Profile</router-link>
                 </li>
                 <li class="nav-item">
-                    <router-link :to="{ name: 'logout' }" class="nav-link">Logout</router-link>
+                    <router-link :to="{ name: 'register' }" class="nav-link">Register</router-link>
+                </li>
+                <li class="nav-item">
+                    <router-link :to="{ name: 'logout' }" class="nav-link" v-if="userLogin">Logout</router-link>
                 </li>
             </ul>
         </div>
@@ -26,7 +29,23 @@
 
 <script>
     export default {
+        data () {
+            return{
+                userLogin: false
+            }
+        },
 
+        created() {
+            this.isLogin();
+        },
+
+        methods: {
+            isLogin: function(){
+                if(localStorage.getItem('__authToken')) {
+                    this.userLogin = true
+                }
+            }
+        }
 
     }
 </script>
